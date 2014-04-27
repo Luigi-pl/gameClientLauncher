@@ -1,35 +1,40 @@
 #include "mytcpsocket.h"
 
-MyTCPSocket::MyTCPSocket(QObject *parent) :
-    QObject(parent)
+
+MyTCPSocket::MyTCPSocket(QObject *parent) : QObject(parent) //konstruktor tworzacy nowy socket
 {
     socket = new QTcpSocket();
 }
-
-MyTCPSocket::~MyTCPSocket()
+MyTCPSocket::~MyTCPSocket() //destruktor zamykajacy polaczenie i usuwajacy socket
 {
     socket->close();
     delete socket;
 }
-
-void MyTCPSocket::connectToHost()
+void MyTCPSocket::connectToHost() //metoda laczy z scisle okreslonym server
 {
-    socket->connectToHost("ultra60.mat.pl", 2350);
+    socket->connectToHost("localhost", 2340);
+    socket->waitForConnected(30000);
 }
-void MyTCPSocket::login(std::string login, std::string password)
+void MyTCPSocket::login(std::string login, std::string password) //metoda wysyla dane sluzace do logowania z pierwszego formularza
 {
-    QCryptographicHash *hash;
-    hash = new QCryptographicHash(QCryptographicHash::Sha512);
-    hash->addData(password.c_str(), password.length());
+
+    QString pass;
+    pass.fromStdString(password);
+    QByteArray hash = QCryptographicHash::hash(pass.toUtf8(), QCryptographicHash::Sha3_512);
+    hash=hash.toHex();
+
 
     socket->write(login.c_str());
-    socket->write(hash->result().data());
+    socket->write("\n");
+    password=hash.data();
+    socket->write(password.c_str());
+    socket->write("\n");
 }
-enum QAbstractSocket::SocketState MyTCPSocket::getStatus()
+enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
 {
     return socket->state();
 }
-void MyTCPSocket::close()
+void MyTCPSocket::close() //zamykanie polaczenia
 {
     socket->close();
     //status = rozlaczony;

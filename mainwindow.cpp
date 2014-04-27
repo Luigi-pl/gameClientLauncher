@@ -5,14 +5,22 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow) //Konstrkutor okna launchera1
 {
     ui->setupUi(this);
     internetConnection = new MyTCPSocket();
     internetConnection->connectToHost();
-    if(internetConnection->getStatus()==3)
+    if(internetConnection->getStatus()==(QAbstractSocket::ConnectingState))
+    {
+        ui->label4->setText("Laczenie");
+    }
+    else if(internetConnection->getStatus()==(QAbstractSocket::ConnectedState))
     {
         ui->label4->setText("Polaczony");
+    }
+    else if(internetConnection->getStatus()==(QAbstractSocket::BoundState))
+    {
+        ui->label4->setText("Polaczony2");
     }
     else
     {
@@ -20,21 +28,23 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 }
 
-MainWindow::~MainWindow()
+MainWindow::~MainWindow() //destruktor okna launchera1
 {
     delete ui;
 }
 
 
-void MainWindow::on_play_clicked()
+void MainWindow::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania - do zrobienia
 {
     internetConnection->login(ui->login->text().toStdString(), ui->password->text().toStdString());
+
+
     MainWindow2 *w = new MainWindow2(internetConnection);
     w->show();
     this->close();
 }
 
-void MainWindow::on_exit_clicked()
+void MainWindow::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
 {
     internetConnection->close();
 }

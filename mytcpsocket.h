@@ -6,6 +6,9 @@
 #include <QCryptographicHash>
 #include <iostream>
 
+//klasa odpowiedzialna za polaczenie internetowe z serwerem
+//dziala na linuxie
+
 class MyTCPSocket : public QObject
 {
 Q_OBJECT

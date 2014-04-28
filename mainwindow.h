@@ -1,11 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
-#include <QMainWindow>
 #include "mytcpsocket.h"
 
-namespace Ui {
-class MainWindow;
+#include "ui_mainwindow.h"
+
+#include "loginlauncher.h"
+#include "downloadlauncher.h"
+
+
+
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -15,15 +21,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-private slots:
-    void on_play_clicked();
-    void on_exit_clicked();
+    void setWidget(int nWidget);
 
 private:
     Ui::MainWindow *ui;
     MyTCPSocket *internetConnection;
-
+    loginLauncher *widgetLoginLauncher;
+    downloadLauncher *widgetDownloadLauncher;
+    QStackedWidget *qStackedWidget;
 };
 
 #endif // MAINWINDOW_H

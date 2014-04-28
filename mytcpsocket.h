@@ -1,13 +1,10 @@
 #ifndef MYTCPSOCKET_H
 #define MYTCPSOCKET_H
 
-#include <QObject>
-#include <QtNetwork/QTcpSocket>
-#include <QCryptographicHash>
-#include <iostream>
+#include "includeFile.h"
 
 //klasa odpowiedzialna za polaczenie internetowe z serwerem
-//dziala na linuxie
+//dziala na linuxie i na wingrozie ;)
 
 class MyTCPSocket : public QObject
 {
@@ -17,7 +14,11 @@ public:
     ~MyTCPSocket();
     enum QAbstractSocket::SocketState getStatus();
     void connectToHost();
-    void login(std::string login, std::string password);
+
+    void sendCommand(const char *command);
+
+    bool sendLogin(std::string login, std::string password);
+
     void close();
 
 signals:
@@ -26,6 +27,7 @@ public slots:
 
 private:
     QTcpSocket *socket;
+    bool getLoginStatus();
 
 };
 

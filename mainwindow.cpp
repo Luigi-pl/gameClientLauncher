@@ -1,50 +1,40 @@
 #include "mainwindow.h"
-#include "mainwindow2.h"
-#include "ui_mainwindow.h"
-#include "iostream"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow) //Konstrkutor okna launchera1
+    ui(new Ui::MainWindow) //Konstrkutor okna glownego
 {
     ui->setupUi(this);
+
+    //stworzenie polaczenia z serwerem
     internetConnection = new MyTCPSocket();
     internetConnection->connectToHost();
-    if(internetConnection->getStatus()==(QAbstractSocket::ConnectingState))
-    {
-        ui->label4->setText("Laczenie");
-    }
-    else if(internetConnection->getStatus()==(QAbstractSocket::ConnectedState))
-    {
-        ui->label4->setText("Polaczony");
-    }
-    else if(internetConnection->getStatus()==(QAbstractSocket::BoundState))
-    {
-        ui->label4->setText("Polaczony2");
-    }
-    else
-    {
-        ui->label4->setText("Brak polaczenia, zresetuj klienta");
-    }
+
+    //obsluga kilku widgetow
+    qStackedWidget = new QStackedWidget;
+
+    //tworzenie widgetow Launchera
+    widgetLoginLauncher = new loginLauncher(internetConnection, this);
+    widgetDownloadLauncher = new downloadLauncher(internetConnection, this);
+
+
+    //wrzucenie widegtow na stos
+    qStackedWidget->addWidget(widgetLoginLauncher);
+    qStackedWidget->addWidget(widgetDownloadLauncher);
+
+    //pokazanie najwyzszego widgetu
+    ui->layout->addWidget(qStackedWidget);
+
 }
 
-MainWindow::~MainWindow() //destruktor okna launchera1
+MainWindow::~MainWindow() //destruktor okna glownego
 {
     delete ui;
+    delete widgetLoginLauncher;
+    delete qStackedWidget;
 }
 
-
-void MainWindow::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania - do zrobienia
+void MainWindow::setWidget(int nWidget)
 {
-    internetConnection->login(ui->login->text().toStdString(), ui->password->text().toStdString());
-
-
-    MainWindow2 *w = new MainWindow2(internetConnection);
-    w->show();
-    this->close();
-}
-
-void MainWindow::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
-{
-    internetConnection->close();
+    qStackedWidget->setCurrentIndex(nWidget);
 }

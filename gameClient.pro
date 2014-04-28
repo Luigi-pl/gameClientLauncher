@@ -15,12 +15,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    mainwindow2.cpp \
-    mytcpsocket.cpp
+    mytcpsocket.cpp \
+    loginlauncher.cpp \
+    downloadlauncher.cpp
 
 HEADERS  += mainwindow.h \
-    mainwindow2.h \
-    mytcpsocket.h
+    mytcpsocket.h \
+    loginlauncher.h \
+    downloadlauncher.h \
+    includeFile.h
 
 FORMS    += mainwindow.ui \
-    mainwindow2.ui
+    loginlauncher.ui \
+    downloadlauncher.ui

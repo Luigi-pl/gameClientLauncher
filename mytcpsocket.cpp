@@ -52,7 +52,6 @@ bool MyTCPSocket::getLoginStatus()  //metoda sprawdzajaca czy logowanie sie powi
         return false;
     }
 }
-
 enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
 {
     return socket->state();

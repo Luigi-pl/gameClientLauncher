@@ -1,7 +1,7 @@
 #include "downloadlauncher.h"
 
 
-downloadLauncher::downloadLauncher(MyTCPSocket *internetConnection, MainWindow *mainWindow, QWidget *parent) :
+downloadLauncher::downloadLauncher(MyTCPSocket *internetConnection, QMainWindow *mainWindow, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::downloadLauncher)
 {
@@ -15,14 +15,13 @@ downloadLauncher::~downloadLauncher()
     delete ui;
 }
 
-void downloadLauncher::on_exit_clicked()
+void downloadLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
 {
     internetConnection->close();
     mainWindow->close();
-
 }
 
-void downloadLauncher::on_play_clicked()
+void downloadLauncher::on_play_clicked() //do zrobienia - uruchomienie gry
 {
 
 }

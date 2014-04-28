@@ -8,6 +8,8 @@ loginLauncher::loginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindo
     this->internetConnection=internetConnection;
     this->mainWindow=mWindow;
     ui->setupUi(this);
+
+    //sprawdzanie statusu polaczanie
     if(this->internetConnection->getStatus()==(QAbstractSocket::ConnectingState))
     {
         ui->label4->setText("Laczenie");
@@ -18,7 +20,7 @@ loginLauncher::loginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindo
     }
     else if(this->internetConnection->getStatus()==(QAbstractSocket::BoundState))
     {
-        ui->label4->setText("Polaczony2");
+        ui->label4->setText("Polaczony");
     }
     else
     {
@@ -31,11 +33,11 @@ loginLauncher::~loginLauncher()
     delete ui;
 }
 
-void loginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania - do zrobienia
+void loginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania
 {
     std::string com="SLN";
-    internetConnection->sendCommand(com.c_str());
-    if(!internetConnection->sendLogin(ui->login->text().toStdString(), ui->password->text().toStdString()))
+    internetConnection->sendCommand(com.c_str());   //wyslanie info o przyszlej komendzie
+    if(internetConnection->sendLogin(ui->login->text().toStdString(), ui->password->text().toStdString()))  //logowanie i sprawdzanie czy logowanie sie powiodlo
     {
         mainWindow->setWidget(1);
     }

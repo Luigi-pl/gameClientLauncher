@@ -3,7 +3,7 @@
 
 #include "mytcpsocket.h"
 #include "ui_downloadlauncher.h"
-class MainWindow;
+
 
 namespace Ui {
 class downloadLauncher;
@@ -14,7 +14,7 @@ class downloadLauncher : public QWidget
     Q_OBJECT
 
 public:
-    explicit downloadLauncher(MyTCPSocket *internetConnection, MainWindow *mainWindow, QWidget *parent = 0);
+    explicit downloadLauncher(MyTCPSocket *internetConnection, QMainWindow *mainWindow, QWidget *parent = 0);
     ~downloadLauncher();
 
 private slots:
@@ -24,7 +24,7 @@ private slots:
 
 private:
     Ui::downloadLauncher *ui;
-    MainWindow *mainWindow;
+    QMainWindow *mainWindow;
     MyTCPSocket *internetConnection;
 };
 

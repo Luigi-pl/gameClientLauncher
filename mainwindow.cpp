@@ -34,7 +34,7 @@ MainWindow::~MainWindow() //destruktor okna glownego
     delete qStackedWidget;
 }
 
-void MainWindow::setWidget(int nWidget)
+void MainWindow::setWidget(int nWidget) //przestawianie widgetu login na download w glownym oknie
 {
     qStackedWidget->setCurrentIndex(nWidget);
 }

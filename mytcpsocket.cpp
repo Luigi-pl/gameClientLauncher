@@ -20,12 +20,16 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     //lista komend
     // SLN - wyslanie loginu i hasla do sprawdzenia
     // LGT - wylogowanie sie i zakonczenie polaczenia
+    // RUF - wyslanie informacji o wersji plikow w kliencie
     socket->write(command);
     socket->write("\n");
 }
 bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wysyla dane sluzace do logowania z loginLaunchera (K: SLN) i
 //zwraca czy logowanie sie powiodlo
 {
+
+    std::string com="SLN";
+    sendCommand(com.c_str());   //wyslanie info o przyszlej komendzie
 
     QString pass;
     pass.fromStdString(password);
@@ -54,6 +58,8 @@ bool MyTCPSocket::getLoginStatus()  //metoda sprawdzajaca czy logowanie sie powi
         return false;
     }
 }
+
+
 enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
 {
     return socket->state();

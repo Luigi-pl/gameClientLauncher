@@ -35,8 +35,7 @@ loginLauncher::~loginLauncher()
 
 void loginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania
 {
-    std::string com="SLN";
-    internetConnection->sendCommand(com.c_str());   //wyslanie info o przyszlej komendzie
+
     if(internetConnection->sendLogin(ui->login->text().toStdString(), ui->password->text().toStdString()))  //logowanie i sprawdzanie czy logowanie sie powiodlo
     {
         mainWindow->setWidget(1);

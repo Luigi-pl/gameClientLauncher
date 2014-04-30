@@ -8,6 +8,8 @@ downloadLauncher::downloadLauncher(MyTCPSocket *internetConnection, QMainWindow 
     this->internetConnection=internetConnection;
     this->mainWindow=mainWindow;
     ui->setupUi(this);
+
+
 }
 
 downloadLauncher::~downloadLauncher()

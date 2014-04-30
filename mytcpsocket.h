@@ -19,7 +19,7 @@ public:
 
     bool sendLogin(std::string login, std::string password);
 
-    void close();
+    void closeConnection();
 
 signals:
 

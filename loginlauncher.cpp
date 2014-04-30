@@ -50,6 +50,6 @@ void loginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych
 
 void loginLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
 {
-    internetConnection->close();
+    internetConnection->closeConnection();
     mainWindow->close();
 }

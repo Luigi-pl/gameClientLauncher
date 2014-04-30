@@ -17,7 +17,7 @@ downloadLauncher::~downloadLauncher()
 
 void downloadLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
 {
-    internetConnection->close();
+    internetConnection->closeConnection();
     mainWindow->close();
 }
 

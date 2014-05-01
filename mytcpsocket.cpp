@@ -64,7 +64,7 @@ std::string MyTCPSocket::readStdString() //pobranie danych z socketu w postaci s
         readStdString=readStdString+data2[i];
     }
 
-
+    delete data2;
     return readStdString;
 }
 QString MyTCPSocket::readQString()  //pobranie z socketu danych w postaci QString

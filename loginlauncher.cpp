@@ -8,7 +8,7 @@ loginLauncher::loginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindo
     this->internetConnection=internetConnection;
     this->mainWindow=mWindow;
     ui->setupUi(this);
-
+    ui->label1->setText(QCoreApplication::applicationName());
     //sprawdzanie statusu polaczanie
     if(this->internetConnection->getStatus()==(QAbstractSocket::ConnectingState))
     {

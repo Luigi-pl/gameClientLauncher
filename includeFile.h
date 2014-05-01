@@ -8,6 +8,7 @@
 #include <QtNetwork/QTcpSocket>
 #include <QCryptographicHash>
 #include <iostream>
-
+#include <QSettings>
+#include <QPoint>
 
 #endif // INCLUDEFILE_H

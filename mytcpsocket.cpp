@@ -20,14 +20,13 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     //lista komend
     // SLN - wyslanie loginu i hasla do sprawdzenia
     // LGT - wylogowanie sie i zakonczenie polaczenia
-    // RUF - wyslanie informacji o wersji plikow w kliencie
+    // RUI - wyslanie informacji o wersji plikow w kliencie i prosba o dostarczenie informacji jakie pliki wymagaja update'u
     socket->write(command);
     socket->write("\n");
 }
 bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wysyla dane sluzace do logowania z loginLaunchera (K: SLN) i
 //zwraca czy logowanie sie powiodlo
 {
-
     std::string com="SLN";
     sendCommand(com.c_str());   //wyslanie info o przyszlej komendzie
 
@@ -44,6 +43,7 @@ bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wy
     socket->write("\n");
     return getLoginStatus();
 }
+
 bool MyTCPSocket::getLoginStatus()  //metoda sprawdzajaca czy logowanie sie powiodlo
 {
     socket->waitForReadyRead(2500);
@@ -58,7 +58,15 @@ bool MyTCPSocket::getLoginStatus()  //metoda sprawdzajaca czy logowanie sie powi
         return false;
     }
 }
+void MyTCPSocket::requestUpdateInfo()
+{
+    std::string com="RUI";
+    sendCommand(com.c_str());
 
+
+    QSettings settings;
+    socket->write((settings.value("version").toString().toStdString()+"\n").c_str());
+}
 
 enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
 {

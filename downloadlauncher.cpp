@@ -8,13 +8,18 @@ downloadLauncher::downloadLauncher(MyTCPSocket *internetConnection, QMainWindow 
     this->internetConnection=internetConnection;
     this->mainWindow=mainWindow;
     ui->setupUi(this);
-
-
+    ui->label1->setText(QCoreApplication::applicationName());
 }
 
 downloadLauncher::~downloadLauncher()
 {
     delete ui;
+}
+void downloadLauncher::updateProcedure()
+{
+    ui->play->setEnabled(false);
+    internetConnection->requestUpdateInfo();
+
 }
 
 void downloadLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem

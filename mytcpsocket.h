@@ -14,11 +14,9 @@ public:
     ~MyTCPSocket();
     enum QAbstractSocket::SocketState getStatus();
     void connectToHost();
-
     void sendCommand(const char *command);
-
     bool sendLogin(std::string login, std::string password);
-
+    void requestUpdateInfo();
     void closeConnection();
 
 signals:

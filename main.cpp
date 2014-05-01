@@ -4,6 +4,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QCoreApplication::setOrganizationName("Luigi's soft");
+    QCoreApplication::setOrganizationDomain("mat.umk.pl/~luigi");
+    QCoreApplication::setApplicationName("Game name");
+
     MainWindow w;
     w.show();
 

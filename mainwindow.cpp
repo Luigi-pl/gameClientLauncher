@@ -10,10 +10,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //Ustawienia gry
+    //Ustawienia launchera i gry
     QSettings settings;
     if(settings.value("version").toString()=="")
     {
+        //Tworzenie ustawien w wypadku pierwszego uruchomienia
         QDesktopWidget widget;
         QRect mainScreenSize = widget.availableGeometry(widget.primaryScreen());
         QPoint startPoint = QPoint(
@@ -24,10 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
         settings.setValue("version", "0");
 
     }
-    else
-    {
-        move(settings.value("pos", QPoint(200, 200)).toPoint());
-    }
+    move(settings.value("pos", QPoint(200, 200)).toPoint());
 
     //stworzenie polaczenia z serwerem
     internetConnection = new MyTCPSocket();
@@ -47,8 +45,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //pokazanie najwyzszego widgetu
     ui->layout->addWidget(qStackedWidget);
-
-
 }
 
 MainWindow::~MainWindow() //destruktor okna glownego

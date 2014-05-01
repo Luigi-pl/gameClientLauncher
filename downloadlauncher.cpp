@@ -15,7 +15,7 @@ downloadLauncher::~downloadLauncher()
 {
     delete ui;
 }
-void downloadLauncher::updateProcedure()
+void downloadLauncher::updateProcedure()    //metoda wykonujaca update gry
 {
     ui->play->setEnabled(false);
     internetConnection->requestUpdateInfo();

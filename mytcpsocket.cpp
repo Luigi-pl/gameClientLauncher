@@ -1,5 +1,5 @@
 #include "mytcpsocket.h"
-
+#include <cstdlib>
 
 MyTCPSocket::MyTCPSocket(QObject *parent) : QObject(parent) //konstruktor tworzacy nowy socket
 {
@@ -24,11 +24,65 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     socket->write(command);
     socket->write("\n");
 }
+enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
+{
+    return socket->state();
+}
+char MyTCPSocket::readChar()    //pobieranie danych z socketu w postaci char
+{
+    socket->waitForReadyRead(250);
+    char data[1];
+    socket->read(data,1);
+    return data[0];
+}
+std::string MyTCPSocket::readStdString() //pobranie danych z socketu w postaci std::string
+{
+    int size;
+    std::string readStdString="";
+    qint64 qintSize;
+    socket->waitForReadyRead(2000);
+    socket->waitForReadyRead(50);
+
+
+    char data[4];
+    socket->read(data,4);
+    for(int i=0; i<4; i++)
+    {
+
+        readStdString=readStdString+data[i];
+    }
+    size = atoi(readStdString.c_str());
+
+    readStdString="";
+    qintSize=static_cast<qint64>(size);
+
+    char *data2= new char[size];
+
+    socket->read(data2,qintSize);
+    for(qint64 i=0; i<size; i++)
+    {
+        readStdString=readStdString+data2[i];
+    }
+
+
+    return readStdString;
+}
+QString MyTCPSocket::readQString()  //pobranie z socketu danych w postaci QString
+{
+    QString readQString;
+    readQString=QString(readStdString().c_str());
+    return readQString;
+}
+void MyTCPSocket::closeConnection() //zamykanie polaczenia
+{
+    sendCommand("LGT");
+    socket->close();
+}
+
 bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wysyla dane sluzace do logowania z loginLaunchera (K: SLN) i
 //zwraca czy logowanie sie powiodlo
 {
-    std::string com="SLN";
-    sendCommand(com.c_str());   //wyslanie info o przyszlej komendzie
+    sendCommand("SLN");   //wyslanie info o przyszlej komendzie
 
     QString pass;
     pass.fromStdString(password);
@@ -43,13 +97,10 @@ bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wy
     socket->write("\n");
     return getLoginStatus();
 }
-
 bool MyTCPSocket::getLoginStatus()  //metoda sprawdzajaca czy logowanie sie powiodlo
 {
-    socket->waitForReadyRead(2500);
-    char data[2]="";
-    socket->read(data,2);
-    if(data[0]=='T')
+    char data=readChar();
+    if(data=='T')
     {
         return true;
     }
@@ -58,23 +109,15 @@ bool MyTCPSocket::getLoginStatus()  //metoda sprawdzajaca czy logowanie sie powi
         return false;
     }
 }
-void MyTCPSocket::requestUpdateInfo()
-{
-    std::string com="RUI";
-    sendCommand(com.c_str());
 
+void MyTCPSocket::requestUpdateInfo()   //pobiera informacje na temat ktore pliki maja byc zupdate'owane
+{
+    sendCommand("RUI");
 
     QSettings settings;
     socket->write((settings.value("version").toString().toStdString()+"\n").c_str());
-}
 
-enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
-{
-    return socket->state();
-}
-void MyTCPSocket::closeConnection() //zamykanie polaczenia
-{
-    sendCommand("LGT");
-    socket->close();
-    //status = rozlaczony;
+    std::string update=readStdString();
+    QString qupdate = QString(update.c_str());
+    settings.setValue("update", qupdate);
 }

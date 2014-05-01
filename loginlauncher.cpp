@@ -35,8 +35,9 @@ loginLauncher::~loginLauncher()
 
 void loginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania
 {
-
-    if(internetConnection->sendLogin(ui->login->text().toStdString(), ui->password->text().toStdString()))  //logowanie i sprawdzanie czy logowanie sie powiodlo
+    if(ui->login->text().length()!=0 &&
+            ui->password->text().length()!=0 &&
+            internetConnection->sendLogin(ui->login->text().toStdString(), ui->password->text().toStdString()))  //logowanie i sprawdzanie czy logowanie sie powiodlo
     {
         mainWindow->setWidget(1);
     }

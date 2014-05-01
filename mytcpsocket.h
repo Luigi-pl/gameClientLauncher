@@ -26,6 +26,9 @@ public slots:
 private:
     QTcpSocket *socket;
     bool getLoginStatus();
+    char readChar();
+    QString readQString();
+    std::string readStdString();
 
 };
 

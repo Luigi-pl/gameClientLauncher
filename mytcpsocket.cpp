@@ -21,6 +21,14 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     // SLN - wyslanie loginu i hasla do sprawdzenia
     // LGT - wylogowanie sie i zakonczenie polaczenia
     // RUI - wyslanie informacji o wersji plikow w kliencie i prosba o dostarczenie informacji jakie pliki wymagaja update'u
+    // RUF - pobieranie kolejnych plikow
+    socket->write(command);
+    socket->write("\n");
+}
+void MyTCPSocket::sendOS(const char *command)
+{
+    //WIN
+    //LIN
     socket->write(command);
     socket->write("\n");
 }
@@ -44,11 +52,10 @@ std::string MyTCPSocket::readStdString() //pobranie danych z socketu w postaci s
     socket->waitForReadyRead(50);
 
 
-    char data[4];
-    socket->read(data,4);
-    for(int i=0; i<4; i++)
+    char data[9];
+    socket->read(data,9);
+    for(int i=0; i<9; i++)
     {
-
         readStdString=readStdString+data[i];
     }
     size = atoi(readStdString.c_str());
@@ -120,4 +127,30 @@ void MyTCPSocket::requestUpdateInfo()   //pobiera informacje na temat ktore plik
     std::string update=readStdString();
     QString qupdate = QString(update.c_str());
     settings.setValue("update", qupdate);
+}
+
+void MyTCPSocket::requestUpdateFile()
+{
+    sendCommand("RUF");
+
+    QSettings settings;
+    QString update = settings.value("update").toString();
+    char *str = new char[10];
+    std::string fileAndPath;
+    #ifdef _WIN32
+        sendOS("WIN");
+    #elif __linux__
+        sendOS("LIN");
+    #endif
+    for(int i=0; i<update.length(); i++)
+    {
+        if(update[i]=='1')
+        {
+            sprintf(str, "%d", i+1);
+            socket->write(str);
+            fileAndPath = readStdString();
+            /*odebranie pliku*/
+        }
+    }
+    socket->write("X");
 }

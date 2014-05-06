@@ -15,8 +15,10 @@ public:
     enum QAbstractSocket::SocketState getStatus();
     void connectToHost();
     void sendCommand(const char *command);
+    void sendOS(const char *command);
     bool sendLogin(std::string login, std::string password);
     void requestUpdateInfo();
+    void requestUpdateFile();
     void closeConnection();
 
 signals:

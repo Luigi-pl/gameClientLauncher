@@ -19,6 +19,7 @@ void downloadLauncher::updateProcedure()    //metoda wykonujaca update gry
 {
     ui->play->setEnabled(false);
     internetConnection->requestUpdateInfo();
+    internetConnection->requestUpdateFile();
 
 }
 

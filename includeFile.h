@@ -10,5 +10,6 @@
 #include <iostream>
 #include <QSettings>
 #include <QPoint>
+#include <QFile>
 
 #endif // INCLUDEFILE_H

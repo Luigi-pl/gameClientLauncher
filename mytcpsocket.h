@@ -29,6 +29,7 @@ private:
     QTcpSocket *socket;
     bool getLoginStatus();
     char readChar();
+    int readInt();
     QString readQString();
     std::string readStdString();
 

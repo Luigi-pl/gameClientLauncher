@@ -43,6 +43,19 @@ char MyTCPSocket::readChar()    //pobieranie danych z socketu w postaci char
     socket->read(data,1);
     return data[0];
 }
+int MyTCPSocket::readInt()
+{
+    int size;
+    std::string readStdString="";
+    char data[9];
+    socket->read(data,9);
+    for(int i=0; i<9; i++)
+    {
+        readStdString=readStdString+data[i];
+    }
+    size = atoi(readStdString.c_str());
+    return size;
+}
 std::string MyTCPSocket::readStdString() //pobranie danych z socketu w postaci std::string
 {
     int size;
@@ -52,15 +65,8 @@ std::string MyTCPSocket::readStdString() //pobranie danych z socketu w postaci s
     socket->waitForReadyRead(50);
 
 
-    char data[9];
-    socket->read(data,9);
-    for(int i=0; i<9; i++)
-    {
-        readStdString=readStdString+data[i];
-    }
-    size = atoi(readStdString.c_str());
+    size=readInt();
 
-    readStdString="";
     qintSize=static_cast<qint64>(size);
 
     char *data2= new char[size];
@@ -137,6 +143,10 @@ void MyTCPSocket::requestUpdateFile()
     QString update = settings.value("update").toString();
     char *str = new char[10];
     std::string fileAndPath;
+    int fileSize;
+    QByteArray qByteArray;
+    QFile file("./some_name.ext");
+
     #ifdef _WIN32
         sendOS("WIN");
     #elif __linux__
@@ -146,11 +156,22 @@ void MyTCPSocket::requestUpdateFile()
     {
         if(update[i]=='1')
         {
-            sprintf(str, "%d", i+1);
+            sprintf(str, "%d", i);
             socket->write(str);
+            socket->write("\n");
             fileAndPath = readStdString();
-            /*odebranie pliku*/
+            std::cout << fileAndPath << std::endl;
+            fileSize=readInt();
+
+            qByteArray = socket->read(fileSize);
+            std::cout << qByteArray.length() << " " << qByteArray.data() << std::endl;
+
+            file.open(QIODevice::WriteOnly);
+
+            file.write(qByteArray);
+            file.close();
         }
     }
     socket->write("X");
+    socket->write("\n");
 }

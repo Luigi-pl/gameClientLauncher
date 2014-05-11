@@ -167,9 +167,30 @@ void MyTCPSocket::requestUpdateFile()
 
             //pobranie rozmiaru pliku
             fileSize=readInt();
-
+            qByteArray.clear();
             //pobranie pliku
-            qByteArray = socket->read(fileSize);
+            if(fileSize<=16358)
+            {
+                qByteArray = socket->read(fileSize);
+            }
+            else
+            {
+                QByteArray read;
+                while(fileSize>0)
+                {
+                    if(fileSize>=16358)
+                    {
+                        read = socket->read(16358);
+                    }
+                    else
+                    {
+                        read = socket->read(fileSize);
+                    }
+                    fileSize=fileSize-read.length();
+                    qByteArray = qByteArray + read;
+                    std::cout << qByteArray.length() << " " << fileSize << " " << read.length() << std::endl;
+                }
+            }
 
 
             filePath = QString::fromStdString(fileAndPath);
@@ -177,10 +198,9 @@ void MyTCPSocket::requestUpdateFile()
             filePath = QDir::fromNativeSeparators(filePath);
             filePath= QApplication::applicationDirPath() + filePath;
 
-
-            std::cout << fileAndPath << std::endl;
+            std::cout << std::endl << fileAndPath << std::endl;
             std::cout << filePath.toStdString() << std::endl;
-            std::cout << qByteArray.length() << " " << qByteArray.data() << std::endl;
+            std::cout << qByteArray.length() << " " << fileSize << std::endl;
 
             file.setFileName(filePath);
             file.open(QIODevice::WriteOnly);

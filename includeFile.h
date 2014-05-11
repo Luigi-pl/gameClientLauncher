@@ -11,5 +11,7 @@
 #include <QSettings>
 #include <QPoint>
 #include <QFile>
+#include <QDir>
+#include <QApplication>
 
 #endif // INCLUDEFILE_H

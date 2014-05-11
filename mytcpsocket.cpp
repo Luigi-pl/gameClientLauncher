@@ -145,7 +145,8 @@ void MyTCPSocket::requestUpdateFile()
     std::string fileAndPath;
     int fileSize;
     QByteArray qByteArray;
-    QFile file("./some_name.ext");
+    QFile file;
+    QString filePath="";
 
     #ifdef _WIN32
         sendOS("WIN");
@@ -156,20 +157,37 @@ void MyTCPSocket::requestUpdateFile()
     {
         if(update[i]=='1')
         {
+            //wyslanie informacji ktory plik chcemy dostac
             sprintf(str, "%d", i);
             socket->write(str);
             socket->write("\n");
+
+            //pobranie sciezki od serwera do ktorej plik ma byc zapisany
             fileAndPath = readStdString();
-            std::cout << fileAndPath << std::endl;
+
+            //pobranie rozmiaru pliku
             fileSize=readInt();
 
+            //pobranie pliku
             qByteArray = socket->read(fileSize);
+
+
+            filePath = QString::fromStdString(fileAndPath);
+            filePath.replace("lin/", "/");
+            filePath = QDir::fromNativeSeparators(filePath);
+            filePath= QApplication::applicationDirPath() + filePath;
+
+
+            std::cout << fileAndPath << std::endl;
+            std::cout << filePath.toStdString() << std::endl;
             std::cout << qByteArray.length() << " " << qByteArray.data() << std::endl;
 
+            file.setFileName(filePath);
             file.open(QIODevice::WriteOnly);
 
             file.write(qByteArray);
             file.close();
+            filePath = "";
         }
     }
     socket->write("X");

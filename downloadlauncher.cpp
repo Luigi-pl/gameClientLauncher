@@ -20,7 +20,7 @@ void downloadLauncher::updateProcedure()    //metoda wykonujaca update gry
     ui->play->setEnabled(false);
     internetConnection->requestUpdateInfo();
     internetConnection->requestUpdateFile();
-
+    ui->play->setEnabled(true);
 }
 
 void downloadLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
@@ -32,4 +32,8 @@ void downloadLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z pro
 void downloadLauncher::on_play_clicked() //do zrobienia - uruchomienie gry
 {
 
+}
+void downloadLauncher::setProgressBar(int i)
+{
+    ui->progressBar->setValue(i);
 }

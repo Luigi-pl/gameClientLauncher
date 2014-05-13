@@ -26,12 +26,15 @@ signals:
 public slots:
 
 private:
+    QByteArray downloadFile();
+    void saveFile(std::string fileAndPath, QByteArray qByteArray);
     QTcpSocket *socket;
     bool getLoginStatus();
     char readChar();
     int readInt();
     QString readQString();
     std::string readStdString();
+
 
 };
 

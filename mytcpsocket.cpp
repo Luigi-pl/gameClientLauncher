@@ -1,6 +1,7 @@
 #include "mytcpsocket.h"
 #include <cstdlib>
 
+
 MyTCPSocket::MyTCPSocket(QObject *parent) : QObject(parent) //konstruktor tworzacy nowy socket
 {
     socket = new QTcpSocket();
@@ -135,6 +136,62 @@ void MyTCPSocket::requestUpdateInfo()   //pobiera informacje na temat ktore plik
     settings.setValue("update", qupdate);
 }
 
+QByteArray MyTCPSocket::downloadFile()  //pobiera dane z Socketu i przetwarza je do postaci QByteArray, ulatwiajac dalsza obrobke
+{
+    int fileSize;
+    QByteArray qByteArray;
+
+    fileSize=readInt();
+    qByteArray.clear();
+    if(fileSize<=16358)
+    {
+        qByteArray = socket->read(fileSize);
+    }
+    else
+    {
+        QByteArray read;
+        while(fileSize>0)
+        {
+            if(fileSize>=16358)
+            {
+                read = socket->read(16358);
+            }
+            else
+            {
+                read = socket->read(fileSize);
+            }
+            fileSize=fileSize-read.length();
+            qByteArray = qByteArray + read;
+        }
+    }
+    return qByteArray;
+}
+
+void MyTCPSocket::saveFile(std::string fileAndPath, QByteArray qByteArray)
+//Zapisuje do pliku znajdujacego sie
+// na linuksie: "/../folder_w_ktorym_uruchomiono_launcher/"+fileAndPath
+// na windowsie: "x:/../folder_w_ktorym_uruchomiono_launcher/"+fileAndPath
+//dane z qByteArray
+{
+    QFile file;
+    QString filePath="";
+
+    filePath = QString::fromStdString(fileAndPath);
+    #ifdef _WIN32
+        filePath.replace("win/", "/");
+    #elif __linux__
+        filePath.replace("lin/", "/");
+    #endif
+    filePath = QDir::fromNativeSeparators(filePath);
+    filePath= QApplication::applicationDirPath() + filePath;
+
+    file.setFileName(filePath);
+    file.open(QIODevice::WriteOnly);
+
+    file.write(qByteArray);
+    file.close();
+
+}
 void MyTCPSocket::requestUpdateFile()
 {
     sendCommand("RUF");
@@ -143,10 +200,6 @@ void MyTCPSocket::requestUpdateFile()
     QString update = settings.value("update").toString();
     char *str = new char[10];
     std::string fileAndPath;
-    int fileSize;
-    QByteArray qByteArray;
-    QFile file;
-    QString filePath="";
 
     #ifdef _WIN32
         sendOS("WIN");
@@ -164,50 +217,7 @@ void MyTCPSocket::requestUpdateFile()
 
             //pobranie sciezki od serwera do ktorej plik ma byc zapisany
             fileAndPath = readStdString();
-
-            //pobranie rozmiaru pliku
-            fileSize=readInt();
-            qByteArray.clear();
-            //pobranie pliku
-            if(fileSize<=16358)
-            {
-                qByteArray = socket->read(fileSize);
-            }
-            else
-            {
-                QByteArray read;
-                while(fileSize>0)
-                {
-                    if(fileSize>=16358)
-                    {
-                        read = socket->read(16358);
-                    }
-                    else
-                    {
-                        read = socket->read(fileSize);
-                    }
-                    fileSize=fileSize-read.length();
-                    qByteArray = qByteArray + read;
-                    std::cout << qByteArray.length() << " " << fileSize << " " << read.length() << std::endl;
-                }
-            }
-
-
-            filePath = QString::fromStdString(fileAndPath);
-            filePath.replace("lin/", "/");
-            filePath = QDir::fromNativeSeparators(filePath);
-            filePath= QApplication::applicationDirPath() + filePath;
-
-            std::cout << std::endl << fileAndPath << std::endl;
-            std::cout << filePath.toStdString() << std::endl;
-            std::cout << qByteArray.length() << " " << fileSize << std::endl;
-
-            file.setFileName(filePath);
-            file.open(QIODevice::WriteOnly);
-
-            file.write(qByteArray);
-            file.close();
-            filePath = "";
+            saveFile(fileAndPath,downloadFile());
         }
     }
     socket->write("X");

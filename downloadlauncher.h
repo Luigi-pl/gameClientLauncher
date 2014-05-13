@@ -16,6 +16,7 @@ class downloadLauncher : public QWidget
 public:
     explicit downloadLauncher(MyTCPSocket *internetConnection, QMainWindow *mainWindow, QWidget *parent = 0);
     void updateProcedure();
+    void setProgressBar(int i);
     ~downloadLauncher();
 
 private slots:

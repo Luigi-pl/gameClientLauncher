@@ -134,6 +134,12 @@ void MyTCPSocket::requestUpdateInfo()   //pobiera informacje na temat ktore plik
     std::string update=readStdString();
     QString qupdate = QString(update.c_str());
     settings.setValue("update", qupdate);
+    QString version = settings.value("version").toString();
+    for(int i=0; i<(qupdate.length() - version.length()); i++)
+    {
+        version=version+"0";
+    }
+    settings.setValue("version", version);
 }
 
 QByteArray MyTCPSocket::downloadFile()  //pobiera dane z Socketu i przetwarza je do postaci QByteArray, ulatwiajac dalsza obrobke
@@ -198,6 +204,7 @@ void MyTCPSocket::requestUpdateFile()
 
     QSettings settings;
     QString update = settings.value("update").toString();
+    std::string version = settings.value("version").toString().toStdString();
     char *str = new char[10];
     std::string fileAndPath;
 
@@ -218,8 +225,14 @@ void MyTCPSocket::requestUpdateFile()
             //pobranie sciezki od serwera do ktorej plik ma byc zapisany
             fileAndPath = readStdString();
             saveFile(fileAndPath,downloadFile());
+
+            update[i]='0';
+            version[i]=version[i]+1;
+            std::cout << static_cast<int>(version[i])-1 << " " << static_cast<int>(version[i]) << std::endl;
         }
     }
+    settings.setValue("update", update);
+    settings.setValue("version", QString::fromStdString(version));
     socket->write("X");
     socket->write("\n");
 }

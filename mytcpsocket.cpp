@@ -1,10 +1,12 @@
 #include "mytcpsocket.h"
 #include <cstdlib>
+#include "mainwindow.h"
 
-
-MyTCPSocket::MyTCPSocket(QObject *parent) : QObject(parent) //konstruktor tworzacy nowy socket
+MyTCPSocket::MyTCPSocket(MainWindow *mWindow, QObject *parent) : QObject(parent) //konstruktor tworzacy nowy socket
 {
     socket = new QTcpSocket();
+    this->mainWindow = mWindow;
+
 }
 MyTCPSocket::~MyTCPSocket() //destruktor zamykajacy polaczenie i usuwajacy socket
 {
@@ -230,6 +232,7 @@ void MyTCPSocket::requestUpdateFile()
             version[i]=version[i]+1;
             std::cout << static_cast<int>(version[i])-1 << " " << static_cast<int>(version[i]) << std::endl;
         }
+        mainWindow->setProgressBar((i+1) * 100/update.length());
     }
     settings.setValue("update", update);
     settings.setValue("version", QString::fromStdString(version));

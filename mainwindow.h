@@ -22,6 +22,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void setWidget(int nWidget);
+    void setProgressBar(int i);
 
 private:
     Ui::MainWindow *ui;

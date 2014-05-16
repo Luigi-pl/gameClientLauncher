@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     move(settings.value("pos", QPoint(200, 200)).toPoint());
 
     //stworzenie polaczenia z serwerem
-    internetConnection = new MyTCPSocket();
+    internetConnection = new MyTCPSocket(this);
     internetConnection->connectToHost();
 
     //obsluga kilku widgetow
@@ -58,4 +58,8 @@ void MainWindow::setWidget(int nWidget) //przestawianie widgetu login na downloa
 {
     qStackedWidget->setCurrentIndex(nWidget);
     widgetDownloadLauncher->updateProcedure();
+}
+void MainWindow::setProgressBar(int i)
+{
+    widgetDownloadLauncher->setProgressBar(i);
 }

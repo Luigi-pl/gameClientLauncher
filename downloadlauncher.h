@@ -4,20 +4,22 @@
 #include "mytcpsocket.h"
 #include "ui_downloadlauncher.h"
 
+class MainWindow;
 
-namespace Ui {
+namespace Ui
+{
 class downloadLauncher;
 }
 
-class downloadLauncher : public QWidget
+class DownloadLauncher : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit downloadLauncher(MyTCPSocket *internetConnection, QMainWindow *mainWindow, QWidget *parent = 0);
+    explicit DownloadLauncher(MyTCPSocket *internetConnection, MainWindow *mainWindow, QWidget *parent = 0);
     void updateProcedure();
     void setProgressBar(int i);
-    ~downloadLauncher();
+    ~DownloadLauncher();
 
 private slots:
     void on_exit_clicked();
@@ -26,7 +28,7 @@ private slots:
 
 private:
     Ui::downloadLauncher *ui;
-    QMainWindow *mainWindow;
+    MainWindow *mainWindow;
     MyTCPSocket *internetConnection;
 };
 

@@ -6,7 +6,7 @@ class MainWindow;
 
 //klasa odpowiedzialna za polaczenie internetowe z serwerem
 //dziala na linuxie i na wingrozie ;)
-class downloadLauncher;
+class DownloadLauncher;
 
 class MyTCPSocket : public QObject
 {

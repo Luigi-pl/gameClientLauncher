@@ -1,7 +1,7 @@
 #include "loginlauncher.h"
 #include "mainwindow.h"
 
-loginLauncher::loginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindow, QWidget *parent) :
+LoginLauncher::LoginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindow, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::loginLauncher)
 {
@@ -28,12 +28,12 @@ loginLauncher::loginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindo
     }
 }
 
-loginLauncher::~loginLauncher()
+LoginLauncher::~LoginLauncher()
 {
     delete ui;
 }
 
-void loginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania
+void LoginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych do logowania
 {
     if(ui->login->text().length()!=0 &&
             ui->password->text().length()!=0 &&
@@ -48,7 +48,7 @@ void loginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych
     }
 }
 
-void loginLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
+void LoginLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
 {
     internetConnection->closeConnection();
     mainWindow->close();

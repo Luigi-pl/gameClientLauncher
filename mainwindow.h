@@ -1,13 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "mytcpsocket.h"
 
+#include "mytcpsocket.h"
 #include "ui_mainwindow.h"
 
-#include "loginlauncher.h"
-#include "downloadlauncher.h"
-
-
+class LoginLauncher;
+class DownloadLauncher;
+class MainMenu;
 
 namespace Ui
 {
@@ -23,12 +22,18 @@ public:
     ~MainWindow();
     void setWidget(int nWidget);
     void setProgressBar(int i);
+    void startGame();
 
 private:
+    void setSizeAndPosition(int width, int height);
+
+
     Ui::MainWindow *ui;
+
     MyTCPSocket *internetConnection;
-    loginLauncher *widgetLoginLauncher;
-    downloadLauncher *widgetDownloadLauncher;
+    LoginLauncher *widgetLoginLauncher;
+    DownloadLauncher *widgetDownloadLauncher;
+    MainMenu *widgetMainMenu;
     QStackedWidget *qStackedWidget;
 };
 

@@ -1,7 +1,7 @@
 #include "downloadlauncher.h"
+#include "mainwindow.h"
 
-
-downloadLauncher::downloadLauncher(MyTCPSocket *internetConnection, QMainWindow *mainWindow, QWidget *parent) :
+DownloadLauncher::DownloadLauncher(MyTCPSocket *internetConnection, MainWindow *mainWindow, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::downloadLauncher)
 {
@@ -11,11 +11,11 @@ downloadLauncher::downloadLauncher(MyTCPSocket *internetConnection, QMainWindow 
     ui->label1->setText(QCoreApplication::applicationName());
 }
 
-downloadLauncher::~downloadLauncher()
+DownloadLauncher::~DownloadLauncher()
 {
     delete ui;
 }
-void downloadLauncher::updateProcedure()    //metoda wykonujaca update gry
+void DownloadLauncher::updateProcedure()    //metoda wykonujaca update gry
 {
     ui->play->setEnabled(false);
     internetConnection->requestUpdateInfo();
@@ -23,17 +23,17 @@ void downloadLauncher::updateProcedure()    //metoda wykonujaca update gry
     ui->play->setEnabled(true);
 }
 
-void downloadLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
+void DownloadLauncher::on_exit_clicked() //obsluga przycisku exit, wyjscie z programu i zamkniecie polaczenia z serwerem
 {
     internetConnection->closeConnection();
     mainWindow->close();
 }
 
-void downloadLauncher::on_play_clicked() //do zrobienia - uruchomienie gry
+void DownloadLauncher::on_play_clicked() //do zrobienia - uruchomienie gry
 {
-
+    mainWindow->startGame();
 }
-void downloadLauncher::setProgressBar(int i)
+void DownloadLauncher::setProgressBar(int i)
 {
     ui->progressBar->setValue(i);
 }

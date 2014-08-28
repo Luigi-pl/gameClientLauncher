@@ -3,6 +3,7 @@
 
 #include "mytcpsocket.h"
 #include "ui_loginlauncher.h"
+
 class MainWindow;
 
 namespace Ui
@@ -10,13 +11,13 @@ namespace Ui
 class loginLauncher;
 }
 
-class loginLauncher : public QWidget
+class LoginLauncher : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit loginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindow, QWidget *parent = 0);
-    ~loginLauncher();
+    explicit LoginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindow, QWidget *parent = 0);
+    ~LoginLauncher();
 
 private slots:
     void on_play_clicked();

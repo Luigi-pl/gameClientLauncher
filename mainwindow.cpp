@@ -4,28 +4,27 @@
 #include <QDesktopWidget>
 #include <QRect>
 
+#include "loginlauncher.h"
+#include "downloadlauncher.h"
+#include "mainmenu.h"
+
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow) //Konstrkutor okna glownego
+    QMainWindow(parent)/*,
+    ui(new Ui::MainWindow) *///Konstrkutor okna glownego
 {
+
+    ui = new Ui::MainWindow;
     ui->setupUi(this);
+
+    setSizeAndPosition(500, 260);
 
     //Ustawienia launchera i gry
     QSettings settings;
     if(settings.value("version").toString()=="")
     {
         //Tworzenie ustawien w wypadku pierwszego uruchomienia
-        QDesktopWidget widget;
-        QRect mainScreenSize = widget.availableGeometry(widget.primaryScreen());
-        QPoint startPoint = QPoint(
-                    mainScreenSize.width()/2-250,
-                    mainScreenSize.height()/2-130
-                    );
-        settings.setValue("pos", startPoint);
         settings.setValue("version", "0");
-
     }
-    move(settings.value("pos", QPoint(200, 200)).toPoint());
 
     //stworzenie polaczenia z serwerem
     internetConnection = new MyTCPSocket(this);
@@ -35,8 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
     qStackedWidget = new QStackedWidget;
 
     //tworzenie widgetow Launchera
-    widgetLoginLauncher = new loginLauncher(internetConnection, this);
-    widgetDownloadLauncher = new downloadLauncher(internetConnection, this);
+    widgetLoginLauncher = new LoginLauncher(internetConnection, this);
+    widgetDownloadLauncher = new DownloadLauncher(internetConnection, this);
 
 
     //wrzucenie widegtow na stos
@@ -46,6 +45,21 @@ MainWindow::MainWindow(QWidget *parent) :
     //pokazanie najwyzszego widgetu
     ui->layout->addWidget(qStackedWidget);
 }
+void MainWindow::setSizeAndPosition(int width, int height)
+{
+    resize(width,height);
+    setMaximumSize(width,height);
+    setMinimumSize(width,height);
+    adjustSize();
+
+    QDesktopWidget widget;
+    QRect mainScreenSize = widget.availableGeometry(widget.primaryScreen());
+    QPoint startPoint = QPoint(
+                mainScreenSize.width()/2-(width/2),
+                mainScreenSize.height()/2-(height/2)
+                );
+    move(startPoint);
+}
 
 MainWindow::~MainWindow() //destruktor okna glownego
 {
@@ -53,11 +67,24 @@ MainWindow::~MainWindow() //destruktor okna glownego
     delete widgetLoginLauncher;
     delete qStackedWidget;
 }
+void MainWindow::startGame()
+{
+    setSizeAndPosition(620, 820);
+    qStackedWidget->removeWidget(widgetLoginLauncher);
+    qStackedWidget->removeWidget(widgetDownloadLauncher);
 
+    widgetMainMenu = new MainMenu(internetConnection, this);
+
+
+    qStackedWidget->addWidget(widgetMainMenu);
+}
 void MainWindow::setWidget(int nWidget) //przestawianie widgetu login na download w glownym oknie
 {
     qStackedWidget->setCurrentIndex(nWidget);
-    widgetDownloadLauncher->updateProcedure();
+    if(widgetDownloadLauncher!=NULL)
+    {
+        widgetDownloadLauncher->updateProcedure();
+    }
 }
 void MainWindow::setProgressBar(int i)
 {

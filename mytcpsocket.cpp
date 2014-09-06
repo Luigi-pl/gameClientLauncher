@@ -1,6 +1,7 @@
 #include "mytcpsocket.h"
-#include <cstdlib>
-#include "mainwindow.h"
+#include <QCryptographicHash>
+#include "sha512.h"
+#include "ui/ui_header/mainwindow.h"
 
 MyTCPSocket::MyTCPSocket(MainWindow *mWindow, QObject *parent) : QObject(parent) //konstruktor tworzacy nowy socket
 {
@@ -100,15 +101,11 @@ bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wy
 {
     sendCommand("SLN");   //wyslanie info o przyszlej komendzie
 
-    QString pass;
-    pass.fromStdString(password);
-    QByteArray hash = QCryptographicHash::hash(pass.toUtf8(), QCryptographicHash::Sha3_512);
-    hash=hash.toHex();
-
-
     socket->write(login.c_str());
     socket->write("\n");
-    password=hash.data();
+
+    password=sha512(password);
+
     socket->write(password.c_str());
     socket->write("\n");
     return getLoginStatus();
@@ -185,13 +182,19 @@ void MyTCPSocket::saveFile(std::string fileAndPath, QByteArray qByteArray)
     QString filePath="";
 
     filePath = QString::fromStdString(fileAndPath);
+
+
     #ifdef _WIN32
-        filePath.replace("win/", "/");
+        filePath.replace("\\\\", "\\");
     #elif __linux__
-        filePath.replace("lin/", "/");
+        filePath.replace("//", "/");
     #endif
+
+
     filePath = QDir::fromNativeSeparators(filePath);
-    filePath= QApplication::applicationDirPath() + filePath;
+    filePath = QApplication::applicationDirPath() + QDir::separator() + filePath;
+
+    std::cout << fileAndPath << " " <<  filePath.toStdString() << std::endl;
 
     file.setFileName(filePath);
     file.open(QIODevice::WriteOnly);
@@ -230,7 +233,6 @@ void MyTCPSocket::requestUpdateFile()
 
             update[i]='0';
             version[i]=version[i]+1;
-            std::cout << static_cast<int>(version[i])-1 << " " << static_cast<int>(version[i]) << std::endl;
         }
         mainWindow->setProgressBar((i+1) * 100/update.length());
     }

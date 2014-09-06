@@ -18,6 +18,14 @@ public:
     explicit MainMenu(MyTCPSocket *internetConnection, MainWindow *mainWindow, QWidget *parent = 0);
     ~MainMenu();
 
+private slots:
+    void on_exit_clicked();
+    void on_statisticWindow_clicked();
+    void on_lookingFor_clicked();
+    void on_fleetsAdmiralsWindow_clicked();
+    void on_researchDevelopmentWindow_clicked();
+    void on_settings_clicked();
+
 private:
     Ui::MainMenu *ui;
     MainWindow *mainWindow;

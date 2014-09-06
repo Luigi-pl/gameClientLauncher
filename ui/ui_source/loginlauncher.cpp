@@ -1,5 +1,5 @@
-#include "loginlauncher.h"
-#include "mainwindow.h"
+#include "ui/ui_header/loginlauncher.h"
+#include "ui/ui_header/mainwindow.h"
 
 LoginLauncher::LoginLauncher(MyTCPSocket *internetConnection, MainWindow *mWindow, QWidget *parent) :
     QWidget(parent),

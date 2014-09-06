@@ -1,5 +1,5 @@
-#include "downloadlauncher.h"
-#include "mainwindow.h"
+#include "ui/ui_header/downloadlauncher.h"
+#include "ui/ui_header/mainwindow.h"
 
 DownloadLauncher::DownloadLauncher(MyTCPSocket *internetConnection, MainWindow *mainWindow, QWidget *parent) :
     QWidget(parent),

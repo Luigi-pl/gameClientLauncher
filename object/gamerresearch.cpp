@@ -5,7 +5,10 @@ GamerResearch::GamerResearch(qint8 shipSize,
                              qint8 missile, qint8 ionCannon, qint8 plasmaGun,
                              qint8 armor, qint8 shield,
                              qint8 ecm, qint8 eccm,
-                             qint8 fleetSize)
+                             qint8 fleetSize,
+                             qint8 upperLimitForMissile, qint8 upperLimitForIonCannon, qint8 upperLimitForPlasmaGun,
+                             qint8 upperLimitForArmor, qint8 upperLimitForShield,
+                             qint8 upperLimitForEcm, qint8 upperLimitForEccm)
 {
     this->shipSize=shipSize;
 
@@ -20,28 +23,42 @@ GamerResearch::GamerResearch(qint8 shipSize,
     this->eccm=eccm;
 
     this->fleetSize=fleetSize;
+
+    this->upperLimitForMissile=upperLimitForMissile;
+    this->upperLimitForIonCannon=upperLimitForIonCannon;
+    this->upperLimitForPlasmaGun=upperLimitForPlasmaGun;
+
+    this->upperLimitForArmor=upperLimitForArmor;
+    this->upperLimitForShield=upperLimitForShield;
+
+    this->upperLimitForEcm=upperLimitForEcm;
+    this->upperLimitForEccm=upperLimitForEccm;
 }
 bool GamerResearch::checkIsResearched(QString researchType, qint8 researchToCheck)
 {
     if(researchType[0]=='A')
     {
-        if(researchToCheck<8 && researchToCheck<=missile)
+        if(researchToCheck<upperLimitForMissile && researchToCheck<=missile)
         {
             return true;
         }
-        else if(8<=researchToCheck && researchToCheck<16 && researchToCheck<=ionCannon)
+        else if(upperLimitForMissile<=researchToCheck &&
+                researchToCheck<upperLimitForIonCannon && researchToCheck<=ionCannon)
         {
             return true;
         }
-        else if(16<=researchToCheck && researchToCheck<24 && researchToCheck<=plasmaGun)
+        else if(upperLimitForIonCannon<=researchToCheck &&
+                researchToCheck<upperLimitForPlasmaGun && researchToCheck<=plasmaGun)
         {
             return true;
         }
-        else if(24<=researchToCheck && researchToCheck<30 && researchToCheck<=armor)
+        else if(upperLimitForPlasmaGun<=researchToCheck &&
+                researchToCheck<upperLimitForArmor && researchToCheck<=armor)
         {
             return true;
         }
-        else if(30<=researchToCheck && researchToCheck<36 && researchToCheck<=shield)
+        else if(upperLimitForArmor<=researchToCheck &&
+                researchToCheck<upperLimitForShield && researchToCheck<=shield)
         {
             return true;
         }
@@ -52,11 +69,12 @@ bool GamerResearch::checkIsResearched(QString researchType, qint8 researchToChec
     }
     else if(researchType[0]=='B')
     {
-        if(researchToCheck<8 && researchToCheck<=ecm)
+        if(researchToCheck<upperLimitForEcm && researchToCheck<=ecm)
         {
             return true;
         }
-        else if(8<=researchToCheck && researchToCheck<16 && researchToCheck<=eccm)
+        else if(upperLimitForEcm<=researchToCheck &&
+                researchToCheck<upperLimitForEccm && researchToCheck<=eccm)
         {
             return true;
         }

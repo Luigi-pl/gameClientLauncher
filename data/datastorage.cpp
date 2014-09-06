@@ -257,7 +257,18 @@ GamerResearch *DataStorage::returnGamerResearch(QString research)
     //2             1       1           1           1       1       1   1       1
     //SHIPS_SIZE    MISSILE ION_CANNON  PLASMA_GUN  ARMOR   SHIELD  ECM ECCM    RFLEET
 
-    return new GamerResearch(hullSize, missile, ionCannon, plasmaGun, armor, shield, ecm, eccm, fleetSize);
+    return new GamerResearch(hullSize,
+                             missile, ionCannon, plasmaGun,
+                             armor, shield,
+                             ecm, eccm,
+                             fleetSize,
+            arrayOfResearchCategoryData[0].getLastElementFromArrayOfResearchData(0)+1,
+            arrayOfResearchCategoryData[0].getLastElementFromArrayOfResearchData(1)+1,
+            arrayOfResearchCategoryData[0].getLastElementFromArrayOfResearchData(2)+1,
+            arrayOfResearchCategoryData[1].getLastElementFromArrayOfResearchData(0)+1,
+            arrayOfResearchCategoryData[1].getLastElementFromArrayOfResearchData(1)+1,
+            arrayOfResearchCategoryData[2].getLastElementFromArrayOfResearchData(0)+1,
+            arrayOfResearchCategoryData[2].getLastElementFromArrayOfResearchData(1)+1);
 }
 
 void DataStorage::interpretLineOfObjectData(char *data, qint8 type)

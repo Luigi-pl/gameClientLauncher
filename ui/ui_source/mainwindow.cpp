@@ -91,7 +91,7 @@ void MainWindow::startGame()
 {
     dataStorage = new DataStorage();
     gamer = new Gamer;
-    gamer->setResearch(dataStorage->returnGamerResearch("04AEIMPSW0"));
+    gamer->setResearch(dataStorage->returnGamerResearch(internetConnection->requestResearchInfo()));
 
     setSizeAndPosition(500, 440);
     qStackedWidget->removeWidget(widgetLoginLauncher);

@@ -26,6 +26,7 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     // LGT - wylogowanie sie i zakonczenie polaczenia
     // RUI - wyslanie informacji o wersji plikow w kliencie i prosba o dostarczenie informacji jakie pliki wymagaja update'u
     // RUF - pobieranie kolejnych plikow
+    // RRS - pobranie danych na temat stanu badan
     socket->write(command);
     socket->write("\n");
 }
@@ -44,15 +45,26 @@ char MyTCPSocket::readChar()    //pobieranie danych z socketu w postaci char
 {
     socket->waitForReadyRead(250);
     char data[1];
+    while(socket->bytesAvailable()<1)
+    {
+        socket->waitForReadyRead(250);
+    }
     socket->read(data,1);
     return data[0];
 }
 int MyTCPSocket::readInt()
 {
-    int size;
+    socket->waitForReadyRead(250);
+    int size=0;
     std::string readStdString="";
     char data[9];
+
+    while(socket->bytesAvailable()<9)
+    {
+        socket->waitForReadyRead(250);
+    }
     socket->read(data,9);
+
     for(int i=0; i<9; i++)
     {
         readStdString=readStdString+data[i];
@@ -62,12 +74,10 @@ int MyTCPSocket::readInt()
 }
 std::string MyTCPSocket::readStdString() //pobranie danych z socketu w postaci std::string
 {
-    int size;
+    int size=0;
     std::string readStdString="";
     qint64 qintSize;
-    socket->waitForReadyRead(2000);
-    socket->waitForReadyRead(50);
-
+    socket->waitForReadyRead(250);
 
     size=readInt();
 
@@ -75,6 +85,11 @@ std::string MyTCPSocket::readStdString() //pobranie danych z socketu w postaci s
 
     char *data2= new char[size];
 
+
+    while(socket->bytesAvailable()<qintSize)
+    {
+        socket->waitForReadyRead(250);
+    }
     socket->read(data2,qintSize);
     for(qint64 i=0; i<size; i++)
     {
@@ -95,7 +110,12 @@ void MyTCPSocket::closeConnection() //zamykanie polaczenia
     sendCommand("LGT");
     socket->close();
 }
+QString MyTCPSocket::requestResearchInfo()
+{
+    sendCommand("RRS");
 
+    return readQString();
+}
 bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wysyla dane sluzace do logowania z loginLaunchera (K: SLN) i
 //zwraca czy logowanie sie powiodlo
 {
@@ -140,7 +160,6 @@ void MyTCPSocket::requestUpdateInfo()   //pobiera informacje na temat ktore plik
     }
     settings.setValue("version", version);
 }
-
 QByteArray MyTCPSocket::downloadFile()  //pobiera dane z Socketu i przetwarza je do postaci QByteArray, ulatwiajac dalsza obrobke
 {
     int fileSize;
@@ -150,6 +169,7 @@ QByteArray MyTCPSocket::downloadFile()  //pobiera dane z Socketu i przetwarza je
     qByteArray.clear();
     if(fileSize<=16358)
     {
+        socket->bytesWritten(fileSize);
         qByteArray = socket->read(fileSize);
     }
     else
@@ -159,10 +179,12 @@ QByteArray MyTCPSocket::downloadFile()  //pobiera dane z Socketu i przetwarza je
         {
             if(fileSize>=16358)
             {
+                socket->bytesWritten(16358);
                 read = socket->read(16358);
             }
             else
             {
+                socket->bytesWritten(fileSize);
                 read = socket->read(fileSize);
             }
             fileSize=fileSize-read.length();

@@ -21,6 +21,7 @@ public:
     bool sendLogin(std::string login, std::string password);
     void requestUpdateInfo();
     void requestUpdateFile();
+    QString requestResearchInfo();
     void closeConnection();
 
 signals:

@@ -74,4 +74,4 @@ FORMS    += ui/ui_gui/mainwindow.ui \
     ui/ui_gui/battleground.ui
 
 OTHER_FILES += \
-    licencja.txt
+    sha512-license.txt

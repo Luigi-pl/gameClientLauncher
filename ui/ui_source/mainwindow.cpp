@@ -86,12 +86,20 @@ GamerResearch *MainWindow::getGamerResearch()
 {
     return gamer->getResearch();
 }
-
+Gamer *MainWindow::getGamer()
+{
+    return gamer;
+}
+void MainWindow::getDataFromServerAboutGamer(Gamer *gamer)
+{
+    gamer->setResearch(dataStorage->returnGamerResearch(internetConnection->requestResearchInfo()));
+    gamer->setCurrentResearch(internetConnection->requestcurrentResearchInfo());
+}
 void MainWindow::startGame()
 {
     dataStorage = new DataStorage();
     gamer = new Gamer;
-    gamer->setResearch(dataStorage->returnGamerResearch(internetConnection->requestResearchInfo()));
+    getDataFromServerAboutGamer(gamer);
 
     setSizeAndPosition(500, 440);
     qStackedWidget->removeWidget(widgetLoginLauncher);
@@ -146,6 +154,7 @@ void MainWindow::setWidgetFleetsAdmirals()
 void MainWindow::setWidgetResearchAndDevelopment()
 {
     setSizeAndPosition(700, 470);
+    widgetResearchAndDevelopment->checkIsResearchFinishedToSetCorrectStateOnButton2();
     setWidget(widgetResearchAndDevelopment);
 }
 void MainWindow::setWidgetGameSettings()

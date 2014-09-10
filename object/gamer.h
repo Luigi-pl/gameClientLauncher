@@ -11,7 +11,10 @@ public:
     Gamer();
     ~Gamer();
     GamerResearch *getResearch();
+
     void setResearch(GamerResearch *gamerResearch);
+    void setCurrentResearch(QString currentResearch);
+    bool canBeResearched(QString researchCategory, qint8 researchToCheck);
 private:
     GamerResearch *gamerResearch;
 };

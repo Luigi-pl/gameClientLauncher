@@ -27,6 +27,8 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     // RUI - wyslanie informacji o wersji plikow w kliencie i prosba o dostarczenie informacji jakie pliki wymagaja update'u
     // RUF - pobieranie kolejnych plikow
     // RRS - pobranie danych na temat stanu badan
+    // CRS - pobranie danych na temat stanu aktualnego badania
+    // SCR - wysłanie danych na temat stanu aktualnego badania
     socket->write(command);
     socket->write("\n");
 }
@@ -113,8 +115,49 @@ void MyTCPSocket::closeConnection() //zamykanie polaczenia
 QString MyTCPSocket::requestResearchInfo()
 {
     sendCommand("RRS");
-
     return readQString();
+}
+QString MyTCPSocket::requestcurrentResearchInfo()
+{
+    sendCommand("CRS");
+    return readQString();
+}
+bool MyTCPSocket::sendCurrentResearch(QString currentResearch, QString *error)
+{
+    sendCommand("SCR");
+    socket->write(currentResearch.toStdString().c_str());
+    socket->write("\n");
+    QString answerFromServer = readQString();
+
+    if(answerFromServer.length()==1)
+    {
+        return true;
+    }
+    else
+    {
+        error->clear();
+        if(QString::compare(answerFromServer, "SS"))
+        {
+            error->append("You didn't finish \nprevious research!");
+        }
+        else if(QString::compare(answerFromServer, "ES"))
+        {
+            error->append("You didn't finish \nprevious research!");
+        }
+        else if(QString::compare(answerFromServer, "DE"))
+        {
+            error->append("There is no \nresearch to end!");
+        }
+        else if(QString::compare(answerFromServer, "SE"))
+        {
+            error->append("You cant't finish \nthis research!");
+        }
+        else if(QString::compare(answerFromServer, "EE"))
+        {
+            error->append("You didn't finish \nprevious research!");
+        }
+        return false;
+    }
 }
 bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wysyla dane sluzace do logowania z loginLaunchera (K: SLN) i
 //zwraca czy logowanie sie powiodlo
@@ -128,9 +171,9 @@ bool MyTCPSocket::sendLogin(std::string login, std::string password) //metoda wy
 
     socket->write(password.c_str());
     socket->write("\n");
-    return getLoginStatus();
+    return checkIsSuccessful();
 }
-bool MyTCPSocket::getLoginStatus()  //metoda sprawdzajaca czy logowanie sie powiodlo
+bool MyTCPSocket::checkIsSuccessful()  //metoda sprawdzajaca czy logowanie sie powiodlo
 {
     char data=readChar();
     if(data=='T')

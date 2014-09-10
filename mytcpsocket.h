@@ -22,6 +22,8 @@ public:
     void requestUpdateInfo();
     void requestUpdateFile();
     QString requestResearchInfo();
+    QString requestcurrentResearchInfo();
+    bool sendCurrentResearch(QString currentResearch, QString *error);
     void closeConnection();
 
 signals:
@@ -34,7 +36,7 @@ private:
     QByteArray downloadFile();
     void saveFile(std::string fileAndPath, QByteArray qByteArray);
     QTcpSocket *socket;
-    bool getLoginStatus();
+    bool checkIsSuccessful();
     char readChar();
     int readInt();
     QString readQString();

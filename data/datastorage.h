@@ -20,8 +20,11 @@ public:
     Ship returnShip(QString ship);
     GamerResearch *returnGamerResearch(QString research);
     QString getResearchNameAndCode(QString arrayType, qint8 id);
+    qint32 getResearchTime(QString arrayType, qint8 id);
 
     QVector<ResearchCategoryData> getArrayOfResearchCategoryData();
+
+
 
 private:
     QVector <EquipmentData> arrayOfEquipmentData;

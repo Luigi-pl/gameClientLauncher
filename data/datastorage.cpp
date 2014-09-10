@@ -110,6 +110,68 @@ QString DataStorage::getResearchNameAndCode(QString arrayType, qint8 id)
         return "error";
     }
 }
+qint32 DataStorage::getResearchTime(QString arrayType, qint8 id)
+{
+    if(arrayType[0]=='A')
+    {
+        return arrayOfEquipmentData[id].getTime();
+    }
+    else if(arrayType[0]=='B')
+    {
+        return arrayOfAccuracyModifierData[id].getTime();
+    }
+    else if(arrayType[0]=='C')
+    {
+        return arrayOfShipData[id].getTime();
+    }
+    else if(arrayType[0]=='-')
+    {
+        if(id==1)
+        {
+            return 12;
+        }
+        else if(id==2)
+        {
+            return 24;
+        }
+        else if(id==3)
+        {
+            return 48;
+        }
+        else if(id==4)
+        {
+            return 96;
+        }
+        else if(id==5)
+        {
+            return 144;
+        }
+        else if(id==6)
+        {
+            return 240;
+        }
+        else if(id==7)
+        {
+            return 384;
+        }
+        else if(id==8)
+        {
+            return 624;
+        }
+        else if(id==9)
+        {
+            return 1008;
+        }
+        else
+        {
+            return 1632;
+        }
+    }
+    else
+    {
+        return 2000;
+    }
+}
 
 Ship DataStorage::returnShip(QString ship)
 {

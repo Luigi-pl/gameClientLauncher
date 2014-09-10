@@ -38,11 +38,14 @@ public:
     void setProgressBar(int i);
     void startGame();
     DataStorage *getDataStorage();
+    Gamer *getGamer();
     GamerResearch *getGamerResearch();
+
 
 private:
     void setSizeAndPosition(int width, int height);
     void setWidget(QWidget *widgetToSet);
+    void getDataFromServerAboutGamer(Gamer *gamer);
 
     Ui::MainWindow *ui;
 

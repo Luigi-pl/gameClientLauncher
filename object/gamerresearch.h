@@ -14,6 +14,17 @@ public:
                   qint8 upperLimitForArmor, qint8 upperLimitForShield,
                   qint8 upperLimitForEcm, qint8 upperLimitForEccm);
     bool checkIsResearched(QString researchType, qint8 researchToCheck);
+    bool checkIsResearchable(QString researchType, qint8 researchToCheck);
+    bool isCurrentResearch();
+    void clearCurrentResearch();
+    void setCurrentResearch(bool state);
+    void setCurrentResearchData(QString category, qint8 id, qint32 researchTime);
+    QString getCurrentResearchTimeEnd();
+    bool isResearchFinished();
+    QString getCurrentResearchCategory();
+    qint8 getCurrentResearchID();
+    QString getCurrentResearchDataToSendToServer(QString type);
+    qint8 setResearchAdvancer();
 private:
     qint8 shipSize;
 
@@ -39,6 +50,12 @@ private:
     qint8 upperLimitForEcm;
     qint8 upperLimitForEccm;
 
+    bool currentResearched;
+
+    qint8 currentResearchedID;
+    QString currentResearchedCategory;
+
+    QDateTime currentResearchEndTime;
 
 };
 

@@ -277,7 +277,7 @@ qint8 DataStorage::toQintFromQChar(QChar qChar, qint8 *smallLetter)
     }
     else if(ret<=122)
     {
-        ret=-97;
+        ret-=97;
         *smallLetter=1;
     }
     return ret;

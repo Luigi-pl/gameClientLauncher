@@ -12,12 +12,14 @@
 
 class Ship;
 class GamerResearch;
+class Fleet;
 
 class DataStorage
 {
 public:
     DataStorage();
     Ship returnShip(QString ship);
+    Fleet *returnFleet(QString fleet);
     GamerResearch *returnGamerResearch(QString research);
     QString getResearchNameAndCode(QString arrayType, qint8 id);
     qint32 getResearchTime(QString arrayType, qint8 id);

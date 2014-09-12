@@ -38,7 +38,8 @@ void LoginLauncher::on_play_clicked()  //obsluga przycisku play, wyslanie danych
     if(internetConnection->getStatus()==QAbstractSocket::ConnectedState &&
             ui->login->text().length()!=0 &&
             ui->password->text().length()!=0 &&
-            internetConnection->sendLogin(ui->login->text().toStdString(), ui->password->text().toStdString()))  //logowanie i sprawdzanie czy logowanie sie powiodlo
+            internetConnection->sendLogin(ui->login->text().toLower().toStdString(),
+                                          ui->password->text().toStdString()))  //logowanie i sprawdzanie czy logowanie sie powiodlo
     {
         mainWindow->setWidget(1);
     }

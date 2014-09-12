@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     data/researchcategorydata.cpp \
     data/researchdata.cpp \
     sha512.cpp \
-    object/gamer.cpp
+    object/gamer.cpp \
+    object/fleet.cpp
 
 HEADERS  += ui/ui_header/mainwindow.h \
     mytcpsocket.h \
@@ -61,7 +62,8 @@ HEADERS  += ui/ui_header/mainwindow.h \
     data/researchcategorydata.h \
     data/researchdata.h \
     sha512.h \
-    object/gamer.h
+    object/gamer.h \
+    object/fleet.h
 
 FORMS    += ui/ui_gui/mainwindow.ui \
     ui/ui_gui/loginlauncher.ui \

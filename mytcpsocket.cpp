@@ -26,9 +26,12 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     // LGT - wylogowanie sie i zakonczenie polaczenia
     // RUI - wyslanie informacji o wersji plikow w kliencie i prosba o dostarczenie informacji jakie pliki wymagaja update'u
     // RUF - pobieranie kolejnych plikow
+
     // RRS - pobranie danych na temat stanu badan
     // CRS - pobranie danych na temat stanu aktualnego badania
     // SCR - wysłanie danych na temat stanu aktualnego badania
+
+    // RFI - pobranie ogolnych danych na temat floty
     socket->write(command);
     socket->write("\n");
 }
@@ -38,6 +41,11 @@ void MyTCPSocket::sendOS(const char *command)
     //LIN
     socket->write(command);
     socket->write("\n");
+}
+QString MyTCPSocket::requestFleetInformation()
+{
+    sendCommand("RFI");
+    return readQString();
 }
 enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
 {
@@ -117,7 +125,7 @@ QString MyTCPSocket::requestResearchInfo()
     sendCommand("RRS");
     return readQString();
 }
-QString MyTCPSocket::requestcurrentResearchInfo()
+QString MyTCPSocket::requestCurrentResearchInfo()
 {
     sendCommand("CRS");
     return readQString();

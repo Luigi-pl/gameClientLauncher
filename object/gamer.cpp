@@ -1,5 +1,7 @@
 #include "gamer.h"
 #include "gamerresearch.h"
+#include "fleet.h"
+#include "ship.h"
 
 Gamer::Gamer()
 {
@@ -36,8 +38,16 @@ void Gamer::setCurrentResearch(QString currentResearch)
         gamerResearch->setCurrentResearchData(category, id.toInt(), timeLeft.toInt());
     }
 }
+void Gamer::setFleet(Fleet *fleet)
+{
+    this->gamerFleet=fleet;
+}
 
 bool Gamer::canBeResearched(QString researchCategory, qint8 researchToCheck)
 {
     return this->gamerResearch->checkIsResearchable(researchCategory, researchToCheck);
+}
+void Gamer::addShip(Ship ship)
+{
+    this->gamerFleet->addShip(ship);
 }

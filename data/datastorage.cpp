@@ -1,4 +1,5 @@
 #include "datastorage.h"
+#include "object/fleet.h"
 #include "object/ship.h"
 #include "object/gamerresearch.h"
 
@@ -332,7 +333,39 @@ GamerResearch *DataStorage::returnGamerResearch(QString research)
             arrayOfResearchCategoryData[2].getLastElementFromArrayOfResearchData(0)+1,
             arrayOfResearchCategoryData[2].getLastElementFromArrayOfResearchData(1)+1);
 }
+Fleet *DataStorage::returnFleet(QString fleet)
+{
+    /*return admiralName + ";" + fleetName + ";" +
+     * Integer.toString(admiralLevel) + ";" + Integer.toString(admiralExperience) + ";" +
+     * Double.toString(admiralAttackBonus) + ";" + Double.toString(admiralDefendBonus) + ";" +
+     * Integer.toString(fleetSizeMaximum);*/
+    QString admiralName = fleet.mid(0, fleet.indexOf(";"));
+    fleet.remove(0, fleet.indexOf(";")+1);
 
+    QString fleetName = fleet.mid(0, fleet.indexOf(";"));
+    fleet.remove(0, fleet.indexOf(";")+1);
+
+    qint32 admiralLevel = fleet.mid(0, fleet.indexOf(";")).toInt();
+    fleet.remove(0, fleet.indexOf(";")+1);
+
+    qint32 admiralExperience = fleet.mid(0, fleet.indexOf(";")).toInt();
+    fleet.remove(0, fleet.indexOf(";")+1);
+
+    float admiralAttackBonus = fleet.mid(0, fleet.indexOf(";")).toFloat();
+    fleet.remove(0, fleet.indexOf(";")+1);
+
+    float admiralDefendBonus = fleet.mid(0, fleet.indexOf(";")).toFloat();
+    fleet.remove(0, fleet.indexOf(";")+1);
+
+    qint32 fleetSizeMaximum = fleet.toInt();
+
+    Fleet *fleetToReturn;
+    fleetToReturn = new Fleet(admiralName, fleetName,
+                              admiralLevel, admiralExperience,
+                              admiralAttackBonus, admiralDefendBonus,
+                              fleetSizeMaximum);
+    return fleetToReturn;
+}
 void DataStorage::interpretLineOfObjectData(char *data, qint8 type)
 {
     QString lineOfData(data);

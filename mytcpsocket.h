@@ -22,8 +22,9 @@ public:
     void requestUpdateInfo();
     void requestUpdateFile();
     QString requestResearchInfo();
-    QString requestcurrentResearchInfo();
+    QString requestCurrentResearchInfo();
     bool sendCurrentResearch(QString currentResearch, QString *error);
+    QString requestFleetInformation();
     void closeConnection();
 
 signals:

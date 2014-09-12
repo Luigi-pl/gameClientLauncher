@@ -1,5 +1,4 @@
 #include "ship.h"
-#include "includeFile.h"
 
 Ship::Ship(QString shipTypeID, QString shipType, qint32 attackModifierFromShipType, qint32 maxSquadronSize, qint32 minShipSize,
            qint32 actShipSize, qint32 maxShipSize, qint32 ownAccuracyModifier, qint32 enemyAccuracyModifier,

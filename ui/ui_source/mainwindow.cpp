@@ -11,6 +11,7 @@
 #include "data/datastorage.h"
 #include "object/gamer.h"
 #include "object/ship.h"
+#include "object/fleet.h"
 
 
 
@@ -93,7 +94,8 @@ Gamer *MainWindow::getGamer()
 void MainWindow::getDataFromServerAboutGamer(Gamer *gamer)
 {
     gamer->setResearch(dataStorage->returnGamerResearch(internetConnection->requestResearchInfo()));
-    gamer->setCurrentResearch(internetConnection->requestcurrentResearchInfo());
+    gamer->setCurrentResearch(internetConnection->requestCurrentResearchInfo());
+    gamer->setFleet(dataStorage->returnFleet(internetConnection->requestFleetInformation()));
 }
 void MainWindow::startGame()
 {

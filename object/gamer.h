@@ -16,7 +16,8 @@ public:
 
     void setResearch(GamerResearch *gamerResearch);
     void setFleet(Fleet *fleet);
-    void addShip(Ship ship);
+    void addShip(Ship ship, qint32 i);
+    qint32 getFleetMaximumSize();
     void setCurrentResearch(QString currentResearch);
     bool canBeResearched(QString researchCategory, qint8 researchToCheck);
 

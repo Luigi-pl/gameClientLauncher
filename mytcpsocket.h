@@ -25,6 +25,7 @@ public:
     QString requestCurrentResearchInfo();
     bool sendCurrentResearch(QString currentResearch, QString *error);
     QString requestFleetInformation();
+    QString requestShipInformation(int i);
     void closeConnection();
 
 signals:

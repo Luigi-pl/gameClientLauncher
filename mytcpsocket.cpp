@@ -32,6 +32,7 @@ void MyTCPSocket::sendCommand(const char *command) //metoda wysylajaca info do s
     // SCR - wysłanie danych na temat stanu aktualnego badania
 
     // RFI - pobranie ogolnych danych na temat floty
+    // RSI - pobranie informacji na temat określonego okrętu
     socket->write(command);
     socket->write("\n");
 }
@@ -47,6 +48,14 @@ QString MyTCPSocket::requestFleetInformation()
     sendCommand("RFI");
     return readQString();
 }
+QString MyTCPSocket::requestShipInformation(int i)
+{
+    sendCommand("RSI");
+    socket->write(QString::number(i).toStdString().c_str());
+    socket->write("\n");
+    return readQString();
+}
+
 enum QAbstractSocket::SocketState MyTCPSocket::getStatus() //uzyskiwanie statusu polaczenie
 {
     return socket->state();

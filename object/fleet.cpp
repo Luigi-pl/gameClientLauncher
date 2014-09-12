@@ -15,10 +15,14 @@ Fleet::Fleet(QString admiralName, QString fleetName, qint32 admiralLevel, qint32
     this->fleetSizeMaximum=fleetSizeMaximum;
 }
 
-void Fleet::addShip(Ship shipToAdd)
+void Fleet::addShip(Ship shipToAdd, qint32 i)
 {
     if(arrayOfShips.size()<fleetSizeMaximum+1)
     {
-        arrayOfShips.append(shipToAdd);
+        arrayOfShips.insert(i, shipToAdd);
     }
+}
+qint32 Fleet::getFleetMaximumSize()
+{
+    return fleetSizeMaximum;
 }

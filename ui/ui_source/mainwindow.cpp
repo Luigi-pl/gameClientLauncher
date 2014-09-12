@@ -96,6 +96,10 @@ void MainWindow::getDataFromServerAboutGamer(Gamer *gamer)
     gamer->setResearch(dataStorage->returnGamerResearch(internetConnection->requestResearchInfo()));
     gamer->setCurrentResearch(internetConnection->requestCurrentResearchInfo());
     gamer->setFleet(dataStorage->returnFleet(internetConnection->requestFleetInformation()));
+    for(int i=0; i<=gamer->getFleetMaximumSize(); i++)
+    {
+        gamer->addShip(dataStorage->returnShip(internetConnection->requestShipInformation(i)), i);
+    }
 }
 void MainWindow::startGame()
 {

@@ -42,12 +42,15 @@ void Gamer::setFleet(Fleet *fleet)
 {
     this->gamerFleet=fleet;
 }
-
+qint32 Gamer::getFleetMaximumSize()
+{
+    return gamerFleet->getFleetMaximumSize();
+}
 bool Gamer::canBeResearched(QString researchCategory, qint8 researchToCheck)
 {
     return this->gamerResearch->checkIsResearchable(researchCategory, researchToCheck);
 }
-void Gamer::addShip(Ship ship)
+void Gamer::addShip(Ship ship, qint32 i)
 {
-    this->gamerFleet->addShip(ship);
+    this->gamerFleet->addShip(ship, i);
 }

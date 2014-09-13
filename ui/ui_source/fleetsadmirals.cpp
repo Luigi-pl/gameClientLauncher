@@ -9,9 +9,11 @@ FleetsAdmirals::FleetsAdmirals(MyTCPSocket *internetConnection, MainWindow *main
 
     this->mainWindow = mainWindow;
     this->internetConnection = internetConnection;
+
+    /*shipToEditWidget[0] = new QWidget();
+    createShipEditPage(&shipToEditWidget[0][0]);*/
+
 }
-
-
 FleetsAdmirals::~FleetsAdmirals()
 {
     delete ui;

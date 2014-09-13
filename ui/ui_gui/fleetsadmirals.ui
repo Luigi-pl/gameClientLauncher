@@ -6,13 +6,1209 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>420</height>
+    <width>680</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>0</y>
+     <width>480</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>40</pointsize>
+     <weight>75</weight>
+     <italic>true</italic>
+     <bold>true</bold>
+     <underline>false</underline>
+     <strikeout>false</strikeout>
+     <stylestrategy>PreferAntialias</stylestrategy>
+     <kerning>false</kerning>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="text">
+    <string notr="true">GAME'S NAME</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::NoTextInteraction</set>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>100</y>
+     <width>680</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <property name="tabPosition">
+    <enum>QTabWidget::North</enum>
+   </property>
+   <property name="tabShape">
+    <enum>QTabWidget::Rounded</enum>
+   </property>
+   <property name="currentIndex">
+    <number>8</number>
+   </property>
+   <widget class="QWidget" name="tab0U">
+    <attribute name="title">
+     <string>Ship 1 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL0">
+      <item>
+       <widget class="QListWidget" name="lW0"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL0">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc80">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb70">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label0">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL0">
+        <item>
+         <widget class="QPushButton" name="pb00">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb10">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb20">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb30">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb40">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb50">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb60">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab1U">
+    <attribute name="title">
+     <string>Ship 2 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL1">
+      <item>
+       <widget class="QListWidget" name="lW1"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL1">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc81">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb71">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label1">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL1">
+        <item>
+         <widget class="QPushButton" name="pb01">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb11">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb21">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb31">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb41">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb51">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb61">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab2U">
+    <attribute name="title">
+     <string>Ship 3 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL2">
+      <item>
+       <widget class="QListWidget" name="lW2"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL2">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc82">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb72">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label2">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL2">
+        <item>
+         <widget class="QPushButton" name="pb02">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb12">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb22">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb32">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb42">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb52">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb62">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab3U">
+    <attribute name="title">
+     <string>Ship 4 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL3">
+      <item>
+       <widget class="QListWidget" name="lW3"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL3">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc83">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb73">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label3">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL3">
+        <item>
+         <widget class="QPushButton" name="pb03">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb13">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb23">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb33">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb43">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb53">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb63">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab4U">
+    <attribute name="title">
+     <string>Ship 5 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL4">
+      <item>
+       <widget class="QListWidget" name="lW4"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL4">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc84">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb74">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label4">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL4">
+        <item>
+         <widget class="QPushButton" name="pb04">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb14">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb24">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb34">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb44">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb54">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb64">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab5U">
+    <attribute name="title">
+     <string>Ship 6 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL5">
+      <item>
+       <widget class="QListWidget" name="lW5"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL5">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc85">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb75">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label5">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL2_4">
+        <item>
+         <widget class="QPushButton" name="pb05">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb15">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb25">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb35">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb45">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb55">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb65">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab6U">
+    <attribute name="title">
+     <string>Ship 7 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_7">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL6">
+      <item>
+       <widget class="QListWidget" name="lW6"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL6">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc86">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb76">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label6">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL6">
+        <item>
+         <widget class="QPushButton" name="pb06">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb16">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb26">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb36">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb46">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb56">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb66">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab7U">
+    <attribute name="title">
+     <string>Ship 8 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_8">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL7">
+      <item>
+       <widget class="QListWidget" name="lW7"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL7">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc87">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb77">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="labe7">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL7">
+        <item>
+         <widget class="QPushButton" name="pb07">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb17">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb27">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb37">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb47">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb57">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb67">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab8U">
+    <attribute name="title">
+     <string>Ship 9 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_9">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL8">
+      <item>
+       <widget class="QListWidget" name="lW8"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL8">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc88">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb78">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label8">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL8">
+        <item>
+         <widget class="QPushButton" name="pb08">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb18">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb28">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb38">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb48">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb58">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb68">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab9U">
+    <attribute name="title">
+     <string>Ship 10 - unlocked</string>
+    </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget_10">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>671</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="hL9">
+      <item>
+       <widget class="QListWidget" name="lW9"/>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gL9">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pc89">
+          <property name="text">
+           <string>Change hull 
+to bigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pb79">
+          <property name="text">
+           <string>Change hull 
+to smaller</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="label9">
+          <property name="text">
+           <string>Standard text</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vL9">
+        <item>
+         <widget class="QPushButton" name="pb09">
+          <property name="text">
+           <string>Add
+Missile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb19">
+          <property name="text">
+           <string>Add
+Ion Cannon</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb29">
+          <property name="text">
+           <string>Add
+Plasma Gun</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb39">
+          <property name="text">
+           <string>Add
+Armor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb49">
+          <property name="text">
+           <string>Add
+Shield</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb59">
+          <property name="text">
+           <string>Add
+ECM</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb69">
+          <property name="text">
+           <string>Add
+ECCM</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -14,6 +14,7 @@ GamerResearch *Gamer::getResearch()
 Gamer::~Gamer()
 {
     delete this->gamerResearch;
+    delete this->gamerFleet;
 }
 void Gamer::setResearch(GamerResearch *gamerResearch)
 {

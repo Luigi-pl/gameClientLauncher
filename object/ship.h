@@ -7,7 +7,7 @@ class Ship
 {
 public:
     Ship() {}
-    Ship(QString shipTypeID, QString shipType, qint32 attackModifierFromShipType, qint32 maxSquadronSize,
+    Ship(QString bdObjectInformation,  QString shipTypeID, QString shipType, qint32 attackModifierFromShipType, qint32 maxSquadronSize,
     qint32 minShipSize, qint32 actShipSize, qint32 maxShipSize,
     qint32 ownAccuracyModifier, qint32 enemyAccuracyModifier,
     qint32 HPTakenPerAttackPerShip, qint32 APTakenPerAttackPerShip, qint32 SPTakenPerAttackPerShip,
@@ -25,8 +25,12 @@ public:
     void recalculateAfterEnemyAttack(qint32 HPTaken, qint32 APTaken, qint32 SPTaken);
     void resetAfterBattler();
     bool canStillFight();
+    QString getBDObjectInformation();
+    void setBDObjectInformation(QString BDObjectInformation);
 
 private:
+    QString bdObjectInformation;
+
     QString shipTypeID;
     QString shipType;
     qint32 attackModifierFromShipType;

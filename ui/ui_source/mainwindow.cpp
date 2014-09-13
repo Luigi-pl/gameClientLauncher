@@ -155,6 +155,7 @@ void MainWindow::setWidgetBattleground()
 }
 void MainWindow::setWidgetFleetsAdmirals()
 {
+    setSizeAndPosition(700, 600);
     setWidget(widgetFleetsAdmirals);
 }
 void MainWindow::setWidgetResearchAndDevelopment()

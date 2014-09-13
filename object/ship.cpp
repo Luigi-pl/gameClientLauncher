@@ -1,6 +1,6 @@
 #include "ship.h"
 
-Ship::Ship(QString shipTypeID, QString shipType, qint32 attackModifierFromShipType, qint32 maxSquadronSize, qint32 minShipSize,
+Ship::Ship(QString bdObjectInformation, QString shipTypeID, QString shipType, qint32 attackModifierFromShipType, qint32 maxSquadronSize, qint32 minShipSize,
            qint32 actShipSize, qint32 maxShipSize, qint32 ownAccuracyModifier, qint32 enemyAccuracyModifier,
            qint32 HPTakenPerAttackPerShip, qint32 APTakenPerAttackPerShip, qint32 SPTakenPerAttackPerShip,
            qint32 maxShipHP, qint32 maxShipAP, qint32 maxShipSP)
@@ -23,6 +23,7 @@ Ship::Ship(QString shipTypeID, QString shipType, qint32 attackModifierFromShipTy
     this->curShipHP=maxShipHP;
     this->curShipAP=maxShipAP;
     this->curShipSP=maxShipSP;
+    this->bdObjectInformation=bdObjectInformation;
 }
 qint32 Ship::getSquadronHPAttackPoints()
 {
@@ -103,4 +104,13 @@ qint32 Ship::getOwnAccuracyModifier(qint32 enemyECMModifier)
 qint32 Ship::getECMModifier()
 {
     return enemyAccuracyModifier;
+}
+QString Ship::getBDObjectInformation()
+{
+    return this->bdObjectInformation;
+}
+
+void Ship::setBDObjectInformation(QString BDObjectInformation)
+{
+    this->bdObjectInformation = BDObjectInformation;
 }

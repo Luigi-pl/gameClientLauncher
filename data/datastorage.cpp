@@ -176,6 +176,8 @@ qint32 DataStorage::getResearchTime(QString arrayType, qint8 id)
 
 Ship DataStorage::returnShip(QString ship)
 {
+    QString bdObjectInformation = ship;
+
     QString sShipType = ship.left(2);
     ShipData *shipData = &(arrayOfShipData[sShipType.toInt()]);
     QString shipName = shipData->getName();
@@ -261,7 +263,7 @@ Ship DataStorage::returnShip(QString ship)
     }
 
 
-    return Ship(sShipType, shipName, attackModifier, nSquadronSize,
+    return Ship(bdObjectInformation, sShipType, shipName, attackModifier, nSquadronSize,
                 shipData->getMinSize(), nShipSize, shipData->getMaxSize(),
                 ownAccuracyModifier, enemyAccuracyModifier,
                 HPTakenPerAttackPerShip, APTakenPerAttackPerShip, SPTakenPerAttackPerShip,

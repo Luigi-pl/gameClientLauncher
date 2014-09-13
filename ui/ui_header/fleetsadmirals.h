@@ -20,6 +20,7 @@ private:
     Ui::FleetsAdmirals *ui;
     MainWindow *mainWindow;
     MyTCPSocket *internetConnection;
+    QWidget *shipToEditWidget[10];
 };
 
 #endif // FLEETSADMIRALS_H
